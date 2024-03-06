@@ -41,6 +41,7 @@ session_start();
 </head>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
+    
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -62,6 +63,7 @@ session_start();
     </svg>
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+        
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
             aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
@@ -110,47 +112,49 @@ session_start();
     </div>
 
     <main class="form-signin w-100 m-auto">
-
-        <?php
-            if($_REQUEST['error'] === 'user') {
-                ?><h3 class="text-warning m-3">Utente non trovato</h3><?php
-            } else if($_REQUEST['errore'] === 'pwd') {
-                ?><h3 class="text-warning m-3">Password non valida</h3><?php 
-            }
-        ?>
-       
-        <form action="controller.php?mode=login" method="POST">
+    <?php
+        if($_REQUEST['error'] === 'true') {
+            ?>
+            <h4 class="m-2 w-100 text-warning">ERRORE. UTENTE GIA' ESISTENTE O QUALCOSA E' ANDATO STORTO</h4><?php
+        };?>
+        <form method="POST" action="controller.php?mode=newUser" >
             <div class="image-container" style="text-align: center;">
                 <img class="mb-4" src="assets/img/crudo.png" alt="" width="100" />
             </div>
 
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email"
-                    value="m.rossi@example.com" />
-                <label for="floatingInput">Email address</label>
+                <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome" name="nome"
+                     />
+                <label for="floatingInputNome">Nome</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password"
-                    value="Pa$$w0rd!" />
+                <input type="text" class="form-control" id="floatingInputCognome" placeholder="Cognome" name="cognome"
+                     />
+                <label for="floatingInputCognome">Cognome</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputCittà" placeholder="Città" name="city"
+                     />
+                <label for="floatingInputCittà">Città</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInputEmail" placeholder="example@example.com" name="email"
+                     />
+                <label for="floatingInputEmail">E-mail</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Almeno 8 caratteri" name="password"
+                     />
                 <label for="floatingPassword">Password</label>
             </div>
-
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="logCookie" id="flexCheckDefault" name="check" />
-                <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
-                </label>
-            </div>
             <button class="btn btn-primary w-100 py-2" type="submit">
-                Sign in
+                Register
             </button>
-            <?php
-            if (isset($_SESSION['error'])) {
+            <!-- if (isset($_SESSION['error'])) {
                 echo '<div class="alert alert-danger my-3" role="alert">' . $_SESSION['error'] . '</div>';
-            }
-            ?>
+            }  -->
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
         </form>
     </main>
