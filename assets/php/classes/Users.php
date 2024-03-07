@@ -12,13 +12,16 @@ namespace Users {
         private $password;
         private $city;
 
-        function __construct($ID, $nome, $cognome, $email, $password, $city) {
+        private $img;
+
+        function __construct($ID, $nome, $cognome, $email, $password, $city, $img) {
             $this->ID = $ID;
             $this->nome = $nome;
             $this->cognome = $cognome;
             $this->email = $email;
             $this->password = $password;
             $this->city = $city;
+            $this->img = $img;
         }
 
     }
@@ -26,8 +29,8 @@ namespace Users {
     class NormalUser extends StrutturaUtente {
         private $isAdmin = false;
 
-        function __construct($ID, $nome, $cognome, $email, $password, $city, $isAdmin) {
-            parent::__construct($ID, $nome, $cognome, $email, $password, $city);
+        function __construct($ID, $nome, $cognome, $email, $password, $city, $img, $isAdmin) {
+            parent::__construct($ID, $nome, $cognome, $email, $password, $city, $img);
             $this->isAdmin = $isAdmin;
         }
     }
@@ -35,8 +38,8 @@ namespace Users {
     class AdminUser extends StrutturaUtente {
         private $isAdmin = true;
 
-        function __construct($ID, $nome, $cognome, $email, $password, $city, $isAdmin) {
-            parent::__construct($ID, $nome, $cognome, $email, $password, $city);
+        function __construct($ID, $nome, $cognome, $email, $password, $city, $img, $isAdmin) {
+            parent::__construct($ID, $nome, $cognome, $email, $password, $city, $img);
             $this->isAdmin = $isAdmin;
         }
     }

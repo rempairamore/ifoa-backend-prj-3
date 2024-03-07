@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +22,20 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Admin Panel</a>
-        </li>
+        <?php 
+            if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === true) {
+                echo ' <li class="nav-item">
+                <a class="nav-link" href="#">Admin Panel</a>
+              </li>';
+            }
+
+        ?>
+       
+        <?php
+        if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+            echo '<li class="nav-item"><a class="nav-link" href="controller.php?mode=logout">Logout</a></li>';
+        }
+        ?>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

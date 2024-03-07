@@ -65,10 +65,10 @@ namespace dto {
             }
         }
         public function saveUser(array $user) {
-            $sql = "INSERT INTO esercizi.utenti_S5L5 (Nome, Cognome, City, Password, email) VALUES (:nome, :cognome, :citta, :password, :email)";
+            $sql = "INSERT INTO esercizi.utenti_S5L5 (Nome, Cognome, City, Password, email, img, isAdmin) VALUES (:nome, :cognome, :citta, :password, :email, :img, :isAdmin)";
             try {
                 $stm = $this->conn->prepare($sql);
-                $stm->execute(['nome' => $user['Nome'], 'cognome' => $user['Cognome'], 'citta' => $user['City'], 'password' => $user['Password'], 'email' => $user['email']]);
+                $stm->execute(['nome' => $user['Nome'], 'cognome' => $user['Cognome'], 'citta' => $user['City'], 'password' => $user['Password'], 'email' => $user['email'], 'img' => $user['img'], 'isAdmin' => $user['isAdmin']]);
                 return $stm->rowCount();
             } catch (\PDOException $e) {
                 // Log dell'errore o visualizzazione per debugging
@@ -83,9 +83,9 @@ namespace dto {
 
 
         public function updateUser(array $user) {
-            $sql = "UPDATE esercizi.utenti_S5L5 SET Nome = :nome, Cognome = :cognome, City = :citta, Password = :password, email = :email WHERE id = :id";
+            $sql = "UPDATE esercizi.utenti_S5L5 SET Nome = :nome, Cognome = :cognome, City = :citta, Password = :password, email = :email, img = :img WHERE id = :id";
             $stm = $this->conn->prepare($sql);
-            $stm->execute(['nome' => $user['Nome'], 'cognome' => $user['Cognome'], 'citta' => $user['City'], 'password' => $user['Password'], 'email' => $user['email']]);
+            $stm->execute(['nome' => $user['Nome'], 'cognome' => $user['Cognome'], 'citta' => $user['City'], 'password' => $user['Password'], 'email' => $user['email'], 'img' => $user['img']]);
             return $stm->rowCount();
         }
         public function deleteUser(int $id) {

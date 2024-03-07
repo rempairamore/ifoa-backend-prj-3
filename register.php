@@ -13,7 +13,7 @@ session_start();
     <meta name="description" content="" />
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.122.0" />
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>CRUDo - Register Page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/" />
 
@@ -41,7 +41,7 @@ session_start();
 </head>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-    
+
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -63,7 +63,7 @@ session_start();
     </svg>
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        
+
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
             aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
@@ -112,12 +112,14 @@ session_start();
     </div>
 
     <main class="form-signin w-100 m-auto">
-    <?php
-        if($_REQUEST['error'] === 'true') {
+        <?php
+        if ($_REQUEST['error'] === 'true') {
             ?>
-            <h4 class="m-2 w-100 text-warning">ERRORE. UTENTE GIA' ESISTENTE O QUALCOSA E' ANDATO STORTO</h4><?php
-        };?>
-        <form method="POST" action="controller.php?mode=newUser" >
+            <h4 class="m-2 w-100 text-warning">ERRORE. UTENTE GIA' ESISTENTE O QUALCOSA E' ANDATO STORTO</h4>
+            <?php
+        }
+        ; ?>
+        <form method="POST" action="controller.php?mode=newUser">
             <div class="image-container" style="text-align: center;">
                 <img class="mb-4" src="assets/img/crudo.png" alt="" width="100" />
             </div>
@@ -125,36 +127,49 @@ session_start();
             <h1 class="h3 mb-3 fw-normal">Please Register</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome" name="nome"
-                     />
-                <label for="floatingInputNome">Nome</label>
+                <input type="text" class="form-control" id="floatingInputName" placeholder="Nome" name="nome" required
+                    aria-label="Nome">
+                <label for="floatingInputName">Nome</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputCognome" placeholder="Cognome" name="cognome"
-                     />
-                <label for="floatingInputCognome">Cognome</label>
+                <input type="text" class="form-control" id="floatingInputSurname" placeholder="Cognome" name="cognome"
+                    required aria-label="Cognome">
+                <label for="floatingInputSurname">Cognome</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputCittà" placeholder="Città" name="city"
-                     />
-                <label for="floatingInputCittà">Città</label>
+                <input type="text" class="form-control" id="floatingInputCity" placeholder="Città" name="city" required
+                    aria-label="Città">
+                <label for="floatingInputCity">Città</label>
             </div>
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInputEmail" placeholder="example@example.com" name="email"
-                     />
+                <input type="url" class="form-control" id="floatingInputImg" placeholder="http://sito.com/imm.jpg"
+                    name="img" aria-label="Link Immagine">
+                <label for="floatingInputImg">Immagine http://sito.com/imm.jpg</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInputEmail" placeholder="example@example.com"
+                    name="email" required aria-label="E-mail">
                 <label for="floatingInputEmail">E-mail</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Almeno 8 caratteri" name="password"
-                     />
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Almeno 8 caratteri"
+                    name="password" required aria-label="Password">
                 <label for="floatingPassword">Password</label>
             </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckSubscribe" name="isAdmin">
+                <label class="form-check-label" for="flexCheckSubscribe">
+                    Spunta per utente Admin
+                </label>
+            </div>
+
             <button class="btn btn-primary w-100 py-2" type="submit">
                 Register
             </button>
-            <!-- if (isset($_SESSION['error'])) {
-                echo '<div class="alert alert-danger my-3" role="alert">' . $_SESSION['error'] . '</div>';
-            }  -->
+            <a href="login.php" class="btn btn-primary w-100 py-2 mt-3" role="button">
+                Go to Login Page
+            </a>
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
         </form>
     </main>
