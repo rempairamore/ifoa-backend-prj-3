@@ -1,3 +1,7 @@
 .navbar-brand {
     width: 80px;
 }
+
+.card-img-top {
+    max-height: 250px;
+}

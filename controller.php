@@ -37,20 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['mode'] === 'newUser'){
         'Password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
     ];
 
-    // $userData = new UtenteNormale(      $_POST['nome'],
-    //                                     $_POST['cognome'],
-    //                                     $_POST['city'],
-    //                                     $_POST['email'],
-    //                                     $_POST['img'],
-    //                                     password_hash($_POST['password'], PASSWORD_DEFAULT),
-                                        
-    //                             );
-
-    
-  
-
-
-
     $result = $userManager->saveUser($userData);
 
 
@@ -95,6 +81,8 @@ if ($_REQUEST["mode"] === 'login') {
 
             if($utente['isAdmin'] === 1) {
                 $_SESSION["isAdmin"] = true; 
+            }else {
+                $_SESSION["isAdmin"] = false;  
             };
 
             // Dopo aver impostato le variabili di sessione, reindirizza all'indice
@@ -116,3 +104,81 @@ if ($_REQUEST["mode"] === 'logout') {
     session_write_close();
     exit(header('Location: register.php'));
 }
+
+
+
+
+
+// update user info 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['mode'] === 'updateInfo'){
+
+    
+
+    $pdoConn = Database::getInstance($config);
+    $conn = $pdoConn->getConnection();
+
+    $userManager = new Dto($conn);
+
+
+    
+
+    $userData = [
+        'Nome' => $_POST['nome'],
+        'Cognome' => $_POST['cognome'],
+        'City' => $_POST['city'],
+        'email' => $_POST['email'],
+        'img' => $_POST['img'],
+        'id' => $_SESSION['actualUpdateId']
+    ];
+
+    $result = $userManager->updateUser($userData);
+
+
+
+    if ($result > 0) {
+        echo "User saved successfully!";
+        exit(header("Location:index.php"));
+    } else {
+        echo "An error occurred while saving the user.";
+    }
+};
+
+
+
+
+// Delete user function 
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['mode'] === 'deleteUser'){
+
+    
+
+    $pdoConn = Database::getInstance($config);
+    $conn = $pdoConn->getConnection();
+
+    $userManager = new Dto($conn);
+
+    $idUtente = $_REQUEST['id'];
+
+    // var_dump($_SESSION);
+
+   
+
+    if($_SESSION['isAdmin'] == false && $_SESSION['user_id'] != $_REQUEST['id']) {
+        echo "<h1 class='m-5'>Sei un h4k3rino???? Prof nun ce provà</h1>";
+        exit();
+    } else {
+        echo "ciao sono dentro";
+        $result = $userManager->deleteUser($idUtente);
+        echo "ho fatto delete";
+        if ($result > 0) {
+            echo "User saved successfully!";
+            exit(header("Location:index.php"));
+        } else {
+            echo "An error occurred while saving the user.";
+        }
+
+    }
+   
+};
