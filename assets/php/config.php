@@ -1,5 +1,7 @@
 <?php
 
+// Prof non modificare i dati che il DB è online è funziona ovunque
+
 return [
     'driver' => 'mysql',
     'host' => 'awsdatabase.c5660a2a26bh.eu-north-1.rds.amazonaws.com',
